@@ -12,7 +12,7 @@ test:
        - |
          perl -pi -e 's/{YOUR_DEBUG_TOKEN}/$ENV{'logentries_token_debug'}/g' le_config.py
     makezip:
-        - zip $CIRCLE_ARTIFACTS/le_lambda_$CIRCLE_BUILD_NUM.zip le_config.py le_certs.pem le_lambda.py		
+         - zip $CIRCLE_ARTIFACTS/le_lambda_$CIRCLE_BUILD_NUM.zip le_config.py le_certs.pem le_lambda.py
 
 deployment:
   production:
