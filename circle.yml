@@ -6,7 +6,7 @@ test:
   override:
     - modify config file:
        - "perl -pi -e 's/{YOUR_USERNAME}/$ENV{'LOGENTRIES_USERNAME'}/g' le_config.py"
-       -: "perl -pi -e 's/{YOUR_LOG_TOKEN}/$ENV{'logentries_token'}/g' le_config.py"
+       - "perl -pi -e 's/{YOUR_LOG_TOKEN}/$ENV{'logentries_token'}/g' le_config.py"
        - "perl -pi -e 's/{YOUR_DEBUG_TOKEN}/$ENV{'logentries_token_debug'}/g' le_config.py"
     - make zip:
         - zip $CIRCLE_ARTIFACTS/le_lambda_$CIRCLE_BUILD_NUM.zip le_config.py le_certs.pem le_lambda.py		
