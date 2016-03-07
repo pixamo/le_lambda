@@ -2,16 +2,24 @@ machine:
   environment:
     BUILD_NUMBER: $CIRCLE_BUILD_NUM
 
+dependencies:
+  pre:
+    - pip install awscli
+	
 test:  
   override:
        - "perl -pi -e 's/{YOUR_USERNAME}/$ENV{'LOGENTRIES_USERNAME'}/g' le_config.py"
+       - echo Replaced user name
        - "perl -pi -e 's/{YOUR_LOG_TOKEN}/$ENV{'logentries_token'}/g' le_config.py"
+       - echo Replaced logentries token
        - "perl -pi -e 's/{YOUR_DEBUG_TOKEN}/$ENV{'logentries_token_debug'}/g' le_config.py"
+       - echo Replaced logentriesdebug token
   post:
-       - zip $CIRCLE_ARTIFACTS/le_lambda_$CIRCLE_BUILD_NUM.zip le_config.py le_certs.pem le_lambda.py
+       - zip le_lambda_$CIRCLE_BUILD_NUM.zip le_config.py le_certs.pem le_lambda.py
+       - echo Made the zip package
 
 deployment:
   production:
     branch: master
     commands:
-      - pip install awscli
+      -  aws s3 cp le_lambda_$CIRCLE_BUILD_NUM.zip s3://$S3BUCKET_NAME/LogentriesELBLogger.zip
