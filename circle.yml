@@ -5,7 +5,7 @@ machine:
 dependencies:
   pre:
     - pip install awscli
-	
+
 test:  
   override:
        - "perl -pi -e 's/{YOUR_USERNAME}/$ENV{'LOGENTRIES_USERNAME'}/g' le_config.py"
