@@ -24,7 +24,5 @@ deployment:
     commands:
       - echo Uploading the zip file
       - aws s3 cp le_lambda_$CIRCLE_BUILD_NUM.zip s3://$S3BUCKET_NAME/LogentriesELBLogger.zip --region $S3BUCKET_REGION
-      - #should add support for creating and updateing the function
-      - #aws lambda create-function  --function-name "elb-log-forwarder-to-logentries" --runtime "python2.7" --role "$LAMBDA_ROLE " --handler "le_lambda.lambda_handler" --memory-size 1536 --timeout 290 --code "S3Bucket=$S3BUCKET_NAME,S3Key=LogentriesELBLogger.zip" --publish
       - echo Publishing the last version of the lamda function
       - aws lambda publish-version --function-name elb-log-forwarder-to-logentries
