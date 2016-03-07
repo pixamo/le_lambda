@@ -27,5 +27,5 @@ deployment:
       - echo Uploading the zip file
       - aws s3 cp le_lambda_$CIRCLE_BUILD_NUM.zip s3://$S3BUCKET_NAME/LogentriesELBLogger.zip --region $S3BUCKET_REGION
       - echo Publishing the last version of the lamda function
-      - aws lambda update-function-code --function-name elb-log-forwarder-to-logentries --region $S3BUCKET_REGION --s3Bucket $S3BUCKET_NAME --s3Key "LogentriesELBLogger.zip" --no-publish
+      - aws lambda update-function-code --function-name elb-log-forwarder-to-logentries --region $S3BUCKET_REGION --s3-bucket $S3BUCKET_NAME --s3-key "LogentriesELBLogger.zip" --no-publish
       - aws lambda publish-version --function-name elb-log-forwarder-to-logentries --region $S3BUCKET_REGION --description "Version $CIRCLE_BUILD_NUM"
