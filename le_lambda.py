@@ -55,7 +55,7 @@ def lambda_handler(event, context):
                     idx = request[1].find('/', 9)
                     url = request[1][idx:]
                     parsed = {
-						'elb': line[1]
+                        'elb': line[1]
                         'ip': line[2].split(':')[0],
                         'method': request[0],
                         'url': url,
@@ -63,8 +63,8 @@ def lambda_handler(event, context):
                     }
                     msg = "\"{0}\" ip=\"{ip}\" request_time=\"{5}\" elb_status=\"{7}\" backend_status=\"{8}\"" \
                           " bytes_received=\"{9}\" bytes_sent=\"{10}\" method=\"{method}\" url=\"{url}\"" \
-                          " user_agent=\"{user_agent}\""\
-						  " elb=\"{elb}\"\n"\
+                          " user_agent=\"{user_agent}\"" \
+                          " elb=\"{elb}\"\n"\
                         .format(*line, **parsed)
                     s.sendall(log_token + msg)
             else:
