@@ -55,7 +55,7 @@ def lambda_handler(event, context):
                     idx = request[1].find('/', 9)
                     url = request[1][idx:]
                     parsed = {
-                        'elb': line[1]
+                        'elb': line[1],
                         'ip': line[2].split(':')[0],
                         'method': request[0],
                         'url': url,
